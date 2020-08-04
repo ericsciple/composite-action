@@ -1,0 +1,17 @@
+name: 'Composite Action'
+description: 'Testing composite action'
+inputs:
+  name:
+    description: 'Your name'
+    default: John Doe
+runs:
+  using: composite
+  steps:
+    - id: foo
+      run: echo "::set-output name=foo_output::foo output value"
+    - id: __bar
+      run: echo "::set-output name=bar_output::bar output value"
+    - run: echo "::set-output name=baz_output::baz output value"
+    - env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"

@@ -4,6 +4,10 @@ inputs:
   name:
     description: 'Your name'
     default: John Doe
+outputs:
+  the-output:
+    description: The output
+    value: ${{ steps.foo.outputs.foo_output }}
 runs:
   using: composite
   steps:

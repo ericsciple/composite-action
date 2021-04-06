@@ -15,7 +15,7 @@ runs:
       run: |
         printenv|sort
       env:
-        MY_HASH: ${{ hashFiles('csc.json') }}
+        MY_HASH: ${{ hashFiles('hello.txt') }}
 #    - id: foo
  #     shell: bash
   #    run: echo "::set-output name=foo_output::foo output value"

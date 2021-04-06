@@ -14,6 +14,8 @@ runs:
     - shell: bash
       run: |
         printenv|sort
+      env:
+        MY_HASH: ${{ hashFiles('actions.yml') }}
 #    - id: foo
  #     shell: bash
   #    run: echo "::set-output name=foo_output::foo output value"

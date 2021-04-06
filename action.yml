@@ -15,7 +15,7 @@ runs:
       run: |
         printenv|sort
       env:
-        MY_HASH: ${{ hashFiles('action.yml') }}
+        MY_HASH: ${{ hashFiles(format('{0}/csc.json') }}
 #    - id: foo
  #     shell: bash
   #    run: echo "::set-output name=foo_output::foo output value"

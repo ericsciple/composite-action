@@ -4,27 +4,23 @@ inputs:
   name:
     description: 'Your name'
     default: John Doe
-#outputs:
- # the-output:
-  #  description: The output
-   # value: ${{ steps.foo.outputs.foo_output }}
+outputs:
+  the-output:
+    description: The output
+    value: ${{ steps.bar.outputs.bar_output }}
 runs:
   using: composite
   steps:
+    - id: foo
+      shell: bash
+      run: |
+        echo "::set-output name=foo_output::hello"
     - shell: bash
       run: |
-        printenv|sort
+        echo "$STEPS_CONTEXT"
       env:
-        MY_HASH: ${{ hashFiles('hello.txt') }}
-#    - id: foo
- #     shell: bash
-  #    run: echo "::set-output name=foo_output::foo output value"
-   # - id: __bar
-    #  shell: bash
-     # run: echo "::set-output name=bar_output::bar output value"
-#    - shell: bash
- #     run: echo "::set-output name=baz_output::baz output value"
-  #  - shell: bash
-   #   env:
-    #    STEPS_CONTEXT: ${{ toJson(steps) }}
-     # run: echo "$STEPS_CONTEXT"
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+    - id: bar
+      shell: bash
+      run: |
+        echo "::set-output name=bar_output::${{ steps.foo.outputs.foo_output }}"
